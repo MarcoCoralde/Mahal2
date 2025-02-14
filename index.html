@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown with Hearts</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<Style>
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e0f7fa; /* Updated background color */
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevent scrolling due to hearts */
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 1; /* Ensure content is above the hearts */
+}
+
+
+
+.message {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    line-height: 1.5;
+    word-wrap: break-word;
+    opacity: 1;
+    max-width: 400px;
+    
+
+}
+
+/* Media query for small devices (max-width: 768px) */
+@media only screen and (max-width: 768px) {
+  .message {
+    margin: 20px auto;
+    padding: 10px;
+  }
+}
+
+/* Media query for extra small devices (max-width: 480px) */
+@media only screen and (max-width: 480px) {
+  .message {
+    margin: 10px auto;
+    padding: 5px;
+  }
+  .message h2 {
+    font-size: 18px;
+  }
+  .message p {
+    font-size: 14px;
+  }
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container video {
+    width: 150px;
+    height: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Space between boxes */
+    margin-top: 20px;
+}
+
+.countdown-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.countdown-box span {
+    font-size: 32px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.countdown-box .label {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+.button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Heart animation styles */
+.heart {
+    position: absolute;
+    top: -10%;
+    color: #00bcd4; /* Light blue color for the hearts */
+    font-size: 2rem;
+    animation: fall linear infinite;
+    user-select: none;
+}
+
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
+}
+
+</Style>
+<body>
+    <div class="container">
+        <div class="message-container">
+            <div class="message">
+                It has been a long time since you said yes. I was very happy when I heard that from you. I know you may not see it, but deep down, I am truly happy. I am very lucky to have someone like you in my life. I will always love you, Mahal ko.
+            </div>
+        </div>
+        <div class="image-container">
+            <video width="300" height="auto" controls>
+                <source src="Vid 1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <span id="days">00</span>
+                <div class="label">Days</div>
+            </div>
+            <div class="countdown-box">
+                <span id="hours">00</span>
+                <div class="label">Hours</div>
+            </div>
+            <div class="countdown-box">
+                <span id="minutes">00</span>
+                <div class="label">Minutes</div>
+            </div>
+            <div class="countdown-box">
+                <span id="seconds">00</span>
+                <div class="label">Seconds</div>
+            </div>
+        </div>
+        <button class="button" onclick="redirectToLink()">Next</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+<Script>
+
+// Function to create a heart element
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.innerHTML = '❤️';
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = Math.random() * 6 + 4 + 's'; // Increased the duration
+    document.body.appendChild(heart);
+
+    // Remove the heart after it falls
+    setTimeout(() => {
+        heart.remove();
+    }, 7000); // Increased the timeout to match the new animation duration
+}
+
+// Function to redirect to a link
+function redirectToLink() {
+    window.location.href = 'https://iadoreyoutae.carrd.co/';
+}
+
+// Create hearts every 300ms
+setInterval(createHeart, 300);
+
+// Countdown timer logic
+const countDownDate = new Date();
+countDownDate.setDate(countDownDate.getDate() + 145);
+countDownDate.setHours(countDownDate.getHours() + 21);
+countDownDate.setMinutes(countDownDate.getMinutes() + 32);
+
+const countdownFunction = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+
+    if (distance < 0) {
+        clearInterval(countdownFunction);
+        document.getElementById("countdown").innerHTML = "EXPIRED";
+    }
+}, 1000);
+</Script>
+</html>
