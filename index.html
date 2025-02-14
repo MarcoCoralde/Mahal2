@@ -198,30 +198,32 @@ function redirectToLink() {
 // Create hearts every 300ms
 setInterval(createHeart, 300);
 
-// Countdown timer logic
-const countDownDate = new Date();
-countDownDate.setDate(countDownDate.getDate() + 145);
-countDownDate.setHours(countDownDate.getHours() + 21);
-countDownDate.setMinutes(countDownDate.getMinutes() + 32);
+// Fixed start date (145 days, 21 hours, 32 minutes, and 0 seconds in the past)
+const startDate = new Date();
+startDate.setDate(startDate.getDate() - 146);
+startDate.setHours(startDate.getHours() - 3);
+startDate.setMinutes(startDate.getMinutes() - 50);
+startDate.setSeconds(startDate.getSeconds() - 0);
 
-const countdownFunction = setInterval(() => {
+// Update the countup every 1 second
+const countupFunction = setInterval(() => {
+    // Get today's date and time
     const now = new Date().getTime();
-    const distance = countDownDate - now;
 
+    // Find the distance between now and the start date
+    const distance = now - startDate;
+
+    // Time calculations for days, hours, minutes, and seconds
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
-
-    if (distance < 0) {
-        clearInterval(countdownFunction);
-        document.getElementById("countdown").innerHTML = "EXPIRED";
-    }
+    // Display the result in the countdown boxes
+    document.getElementById("days").innerText = String(days).padStart(2, '0');
+    document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+    document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+    document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
 }, 1000);
 </Script>
 </html>
