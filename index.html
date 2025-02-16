@@ -144,8 +144,8 @@ body {
                 It has been a long time since you said yes. 
                 I was very happy when I heard that from you mahal. 
                 I know you may not see it, but deep down, 
-                I am truly happy. I am very grateful to have someone 
-                like you in my life. I will always love you, Mahal ko.
+                I am truly happy. I am so grateful to have someone 
+                like you in my life. Thank you for always making me happy. I will always love you, Mahal ko.
             </div>
         </div>
         <div class="image-container">
@@ -172,7 +172,7 @@ body {
                 <div class="label">Seconds</div>
             </div>
         </div>
-        <button class="button" onclick="redirectToLink()">Next</button>
+        <button class="button" onclick="redirectToLink()">Click mo to mahal</button>
     </div>
     <script src="script.js"></script>
 </body>
@@ -180,13 +180,28 @@ body {
 <Script>
 
 // Function to create a heart element
+// Function to create a heart element
 function createHeart() {
     const heart = document.createElement('div');
     heart.innerHTML = '❤️';
     heart.classList.add('heart');
     heart.style.left = Math.random() * 100 + 'vw';
     heart.style.animationDuration = Math.random() * 6 + 4 + 's'; // Increased the duration
+    heart.style.opacity = 0; // Make the heart invisible initially
+
+    // Randomly increase the font size of the heart
+    if (Math.random() < 0.2) { // 20% chance of a big heart
+        heart.style.fontSize = '4rem';
+    } else {
+        heart.style.fontSize = '2rem';
+    }
+
     document.body.appendChild(heart);
+
+    // Animate the heart to appear and fall
+    setTimeout(() => {
+        heart.style.opacity = 1; // Make the heart visible
+    }, 100); // Delay the appearance by 100ms
 
     // Remove the heart after it falls
     setTimeout(() => {
@@ -196,17 +211,17 @@ function createHeart() {
 
 // Function to redirect to a link
 function redirectToLink() {
-    window.location.href = 'https://iadoreyoutae.carrd.co/';
+    window.location.href = 'https://marcocoralde.github.io/Mahal-3/';
 }
 
 // Create hearts every 300ms
-setInterval(createHeart, 300);
+setInterval(createHeart, 700);
 
 // Fixed start date (145 days, 21 hours, 32 minutes, and 0 seconds in the past)
 const startDate = new Date();
-startDate.setDate(startDate.getDate() - 146);
-startDate.setHours(startDate.getHours() - 3);
-startDate.setMinutes(startDate.getMinutes() - 50);
+startDate.setDate(startDate.getDate() - 147);
+startDate.setHours(startDate.getHours() - 21);
+startDate.setMinutes(startDate.getMinutes() - 30);
 startDate.setSeconds(startDate.getSeconds() - 0);
 
 // Update the countup every 1 second
